@@ -1,0 +1,1 @@
+export default function PasswordInput({ value, onChange, placeholder = "Enter your password" }) { return <input type="password" value={value} onChange={onChange} placeholder={placeholder} required />; }

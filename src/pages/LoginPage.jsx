@@ -1,0 +1,7 @@
+import { Navigate, useNavigate } from "react-router-dom";
+import { FiArrowRight } from "react-icons/fi";
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import AuthFrame from "../components/AuthFrame";
+import PasswordInput from "../components/PasswordInput";
+export default function LoginPage() { const { login, currentUser } = useAuth(); const navigate = useNavigate(); const [form, setForm] = useState({ email: "", password: "" }); const [error, setError] = useState(""); if (currentUser) return <Navigate to="/dashboard" replace />; const submit = (event) => { event.preventDefault(); const issue = login(form.email, form.password); issue ? setError(issue) : navigate("/dashboard"); }; return <AuthFrame eyebrow="Welcome back" title="Sign in to your route"><p className="form-intro">Pick up right where you left off.</p><form onSubmit={submit}>{error && <div className="form-error">{error}</div>}<label>Email address<input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@example.com" required /></label><label>Password<PasswordInput value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} /></label><button className="primary-button" type="submit">Sign in <FiArrowRight /></button></form><p className="auth-switch">New to MyRoute? <a href="/signup">Create an account</a></p></AuthFrame>; }

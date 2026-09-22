@@ -1,0 +1,1 @@
+export default function Avatar({ user, size = "large" }) { return user.avatar ? <img className={`avatar avatar-${size}`} src={user.avatar} alt={user.name} /> : <div className={`avatar avatar-${size}`}>{user.name.split(" ").map((name) => name[0]).join("").slice(0, 2).toUpperCase()}</div>; }

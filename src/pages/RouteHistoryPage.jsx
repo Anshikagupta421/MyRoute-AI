@@ -1,0 +1,9 @@
+import { FiArrowRight, FiCalendar, FiClock, FiMapPin, FiUsers } from "react-icons/fi";
+import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
+export default function RouteHistoryPage() {
+  const { currentUser } = useAuth();
+  const history = [...(currentUser.tripHistory || [])].reverse();
+  return <div className="page history-page"><div className="page-heading"><div><span className="eyebrow">Your journeys</span><h1>Route history</h1><p>Review the trips you have planned with MyRoute AI.</p></div><NavLink className="primary-button history-plan-button" to="/plan-route"><FiArrowRight /> Plan a route</NavLink></div>{history.length ? <section className="history-list">{history.map((trip, index) => <article className="history-card" key={`${trip.createdAt || index}-${index}`}><div className="history-card-heading"><div><span className="history-date"><FiCalendar /> {trip.createdAt ? new Date(trip.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "Recent trip"}</span><h2>{trip.pickup} <FiArrowRight /> {trip.destination}</h2></div><span className="history-status">Saved trip</span></div><div className="history-details"><span><FiClock /> {trip.time || "Time not set"}</span><span><FiCalendar /> {trip.date || "Date not set"}</span><span><FiUsers /> {trip.passengers || 1} passenger{Number(trip.passengers) === 1 ? "" : "s"}</span></div></article>)}</section> : <section className="history-empty card"><div className="history-empty-icon"><FiMapPin /></div><span className="eyebrow">No trips yet</span><h2>Your route history will appear here.</h2><p>Plan your first journey to start building your personal travel record.</p><NavLink className="primary-button" to="/plan-route"><FiArrowRight /> Plan your first route</NavLink></section>}</div>;
+}

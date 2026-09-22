@@ -1,0 +1,3 @@
+import { FiShield } from "react-icons/fi";
+import Brand from "./Brand";
+export default function AuthFrame({ children, eyebrow, title }) { return <main className="auth-page"><div className="auth-aside"><Brand /><div className="auth-aside-copy"><span className="eyebrow">{eyebrow}</span><h1>Move with clarity.<br /><em>Go further.</em></h1><p>A calmer, smarter way to think about every journey starts here.</p><div className="trust-row"><FiShield /> Your data stays yours, always.</div></div><div className="aside-orbit" /></div><section className="auth-panel"><div className="mobile-brand"><Brand /></div><div className="auth-card"><span className="eyebrow">{eyebrow}</span><h2>{title}</h2>{children}</div></section></main>; }
